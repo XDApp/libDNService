@@ -36,7 +36,7 @@ DNCmdEchoReply::DNCmdEchoReply(DNServiceManager* service)
 
 DNCmdEchoReply::~DNCmdEchoReply()
 {
-	delete WhenRecv;
+	DDel(WhenRecv);
 }
 
 void DNCmdEchoReply::Send(const DSocketAddrIn &Addr)

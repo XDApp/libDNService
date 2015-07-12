@@ -31,5 +31,6 @@ DNTransData* DNCmd::CreatePacket()
 
 void DNCmd::DestroyPacket(DNTransData *Data)
 {
-	delete Data;
+	
+	Data;
 }

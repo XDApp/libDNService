@@ -166,6 +166,8 @@
     <ClInclude Include="DNPacket.h" />
     <ClInclude Include="DNPacketLayer.h" />
     <ClInclude Include="DNServerDgramSocket.h" />
+    <ClInclude Include="DNServiceRunner.h" />
+    <ClInclude Include="DSocketSystem.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -183,6 +185,8 @@
     <ClCompile Include="DNPacket.cpp" />
     <ClCompile Include="DNPacketLayer.cpp" />
     <ClCompile Include="DNServerDgramSocket.cpp" />
+    <ClCompile Include="DNServiceRunner.cpp" />
+    <ClCompile Include="DSocketSystem.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

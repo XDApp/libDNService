@@ -66,6 +66,12 @@
     <ClInclude Include="DNServiceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DNServiceRunner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DSocketSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -108,6 +114,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DNServiceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DNServiceRunner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DSocketSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

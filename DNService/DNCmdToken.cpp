@@ -38,7 +38,7 @@ DNCmdTokenReply::DNCmdTokenReply(DNServiceManager* service)
 
 DNCmdTokenReply::~DNCmdTokenReply()
 {
-	delete WhenRecv;
+	DDel(WhenRecv);
 }
 
 const int TokenSize = 20;
@@ -61,7 +61,6 @@ void DNCmdTokenReply::Send(const DSocketAddrIn &Addr)
 
 	char tmp[30];
 	strncpy_s(tmp, Data->Data, Data->Size);
-	std::cout << "Sending: " << tmp << std::endl;
 	this->Service->UserLayer->Send(Data);
 
 }

@@ -19,5 +19,5 @@ DNTransData* DNLayer::CreatePacket()
 
 void DNLayer::DestroyPacket(DNTransData *Data)
 {
-	delete Data;
+	DDel(Data);
 }
