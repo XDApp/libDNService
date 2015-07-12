@@ -153,11 +153,35 @@
   <ItemGroup>
     <ClInclude Include="DACore.h" />
     <ClInclude Include="DANetwork.h" />
+    <ClInclude Include="DNCmd.h" />
+    <ClInclude Include="DNCmdConnect.h" />
+    <ClInclude Include="DNCmdEcho.h" />
+    <ClInclude Include="DNCmdLayer.h" />
+    <ClInclude Include="DNCmdProcessor.h" />
+    <ClInclude Include="DNCmdToken.h" />
+    <ClInclude Include="DNDataLayer.h" />
+    <ClInclude Include="DNLayer.h" />
+    <ClInclude Include="DNServiceManager.h" />
+    <ClInclude Include="DNNetworkLayer.h" />
+    <ClInclude Include="DNPacket.h" />
+    <ClInclude Include="DNPacketLayer.h" />
     <ClInclude Include="DNServerDgramSocket.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DNCmd.cpp" />
+    <ClCompile Include="DNCmdConnect.cpp" />
+    <ClCompile Include="DNCmdEcho.cpp" />
+    <ClCompile Include="DNCmdLayer.cpp" />
+    <ClCompile Include="DNCmdProcessor.cpp" />
+    <ClCompile Include="DNCmdToken.cpp" />
+    <ClCompile Include="DNDataLayer.cpp" />
+    <ClCompile Include="DNLayer.cpp" />
+    <ClCompile Include="DNServiceManager.cpp" />
+    <ClCompile Include="DNNetworkLayer.cpp" />
+    <ClCompile Include="DNPacket.cpp" />
+    <ClCompile Include="DNPacketLayer.cpp" />
     <ClCompile Include="DNServerDgramSocket.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
