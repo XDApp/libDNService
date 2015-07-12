@@ -21,8 +21,6 @@ void DNNetworkLayer::Receive(DNTransData *Data)
 
 void DNNetworkLayer::Send(DNTransData *Data)
 {
-	//while (!this->Service->SocketLock.try_lock())Sleep(50);
 	this->Service->ListenSocket->Send((const char*)(&Data->Packet), Data->Size + 10, Data->Addr);
-	//this->Service->SocketLock.unlock();
 	this->DestroyPacket(Data);
 }

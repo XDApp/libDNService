@@ -14,5 +14,10 @@ public:
 
 	DNCmd* DNCmdProcessor::GetCmd(DNCmdType Type);
 	void Register(DNCmdType Type, DNCmd* Command);
+
+	template<class CmdType> CmdType* ParseCmd(DNCmdType Type)
+	{
+		return dynamic_cast<CmdType*>(this->GetCmd(Type));
+	}
 };
 

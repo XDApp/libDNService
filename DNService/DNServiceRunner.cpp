@@ -36,11 +36,11 @@ void DNServiceRunner::RunServ()
 
 	this->Service = new DNServiceManager();
 
-	DNNetworkLayer *networkLayer = new DNNetworkLayer(DNServiceRunner::Service);
-	DNDataLayer *dataLayer = new DNDataLayer(DNServiceRunner::Service);
-	DNPacketLayer *packetLayer = new DNPacketLayer(DNServiceRunner::Service);
-	DNCmdLayer *cmdLayer = new DNCmdLayer(DNServiceRunner::Service);
-	DNUserLayer *userLayer = new DNUserLayer(DNServiceRunner::Service);
+	DNNetworkLayer *networkLayer = new DNNetworkLayer(this->Service);
+	DNDataLayer *dataLayer = new DNDataLayer(this->Service);
+	DNPacketLayer *packetLayer = new DNPacketLayer(this->Service);
+	DNCmdLayer *cmdLayer = new DNCmdLayer(this->Service);
+	DNUserLayer *userLayer = new DNUserLayer(this->Service);
 
 	this->Service->NetworkLayer = networkLayer;
 	this->Service->DataLayer = dataLayer;
@@ -71,7 +71,7 @@ void DNServiceRunner::StopServ()
 	DDel(this->Service->CMDLayer);
 	DDel(this->Service->UserLayer);
 
-	GlobalDF->DebugManager->Log(this, L"[Log] Dawn Network Service Disposed");
+	GlobalDF->DebugManager->Log(this, L"Dawn Network Service Disposed");
 }
 
 void DNServiceRunner::RunSocket()
@@ -79,7 +79,7 @@ void DNServiceRunner::RunSocket()
 	this->Service->ListenSocket = new DNServerDgramSocket();
 	this->ListenAddr = DSocketAddrIn(6000);
 	this->Service->ListenSocket->Bind(this->ListenAddr);
-	GlobalDF->DebugManager->Log(this, L"[Log] Socket Initialized");
+	GlobalDF->DebugManager->Log(this, L"Socket Initialized");
 	this->Receiving = true;
 	auto RecvFunc = [this]()
 	{
@@ -90,9 +90,7 @@ void DNServiceRunner::RunSocket()
 
 		while (this->Receiving)
 		{
-			//while (!this->Service->SocketLock.try_lock())Sleep(10);
 			len = this->Service->ListenSocket->Recv((char*)&Packet, sizeof(Packet), AddrIn);
-			//this->Service->SocketLock.unlock();
 			if (len > 0)
 			{
 				DNTransData *TransData = new DNTransData;
@@ -109,17 +107,17 @@ void DNServiceRunner::RunSocket()
 		return;
 	};
 	this->ListenThread = new std::thread(RecvFunc);
-	GlobalDF->DebugManager->Log(this, L"[Log] Socket Receiving");
+	GlobalDF->DebugManager->Log(this, L"Socket Receiving");
 }
 
 void DNServiceRunner::StopSocket()
 {
-	GlobalDF->DebugManager->Log(this, L"[Log] Socket Disposing");
+	GlobalDF->DebugManager->Log(this, L"Socket Disposing");
 	this->Receiving = false;
 	this->ThreadDisposed = false;
 	while (this->ThreadDisposed);
 	this->ListenThread->detach();
 	DDel(this->Service->ListenSocket);
 	DDel(this->ListenThread);
-	GlobalDF->DebugManager->Log(this, L"[Log] Socket Disposed");
+	GlobalDF->DebugManager->Log(this, L"Socket Disposed");
 }

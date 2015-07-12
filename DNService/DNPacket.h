@@ -37,14 +37,21 @@ class DNTransData
 {
 	DClass(DNTransData)
 public:
-	DNPacket Packet;										//Network Layer Packet
+	DNTransData() :
+		Size(Packet.Size),
+		EncryptType(Packet.EncryptType),
+		Cmd(Packet.Request.Cmd),
+		ID(Packet.Request.ID),
+		Data(Packet.Request.Data)
+	{};
+	DNPacket Packet;							//Network Layer Packet
 
-	DNPacketSize &Size = Packet.Size;						//User Layer Size
-	DNEncryptType &EncryptType = Packet.EncryptType;		//User Layer EncryptType
+	DNPacketSize &Size;							//User Layer Size
+	DNEncryptType &EncryptType;					//User Layer EncryptType
 
-	DNCommand &Cmd = Packet.Request.Cmd;					//User Layer Command
-	DNMessageID &ID = Packet.Request.ID;					//Packet Layer ID
-	DNData *Data = Packet.Request.Data;						//User Layer Data
+	DNCommand &Cmd;								//User Layer Command
+	DNMessageID &ID;							//Packet Layer ID
+	DNData *Data;								//User Layer Data
 
-	DSocketAddrIn Addr;										//User Layer IP Address
+	DSocketAddrIn Addr;							//User Layer IP Address
 };

@@ -1,12 +1,11 @@
 #include "stdafx.h"
 #include "DNUserLayer.h"
-#include "DNLayerService.h"
+#include "DNServiceManager.h"
 #include "DNPacket.h"
-#include "DSocketAddrIn.h"
 #include "DNCmd.h"
 #include "DNCmdProcessor.h"
 
-DNUserLayer::DNUserLayer(DNLayerService *service) :DNLayer(service)
+DNUserLayer::DNUserLayer(DNServiceManager *service) :DNLayer(service)
 {
 }
 

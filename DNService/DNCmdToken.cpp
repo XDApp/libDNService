@@ -62,7 +62,6 @@ void DNCmdTokenReply::Send(const DSocketAddrIn &Addr)
 	char tmp[30];
 	strncpy_s(tmp, Data->Data, Data->Size);
 	this->Service->UserLayer->Send(Data);
-
 }
 
 void DNCmdTokenReply::Recv(DNTransData* Data)

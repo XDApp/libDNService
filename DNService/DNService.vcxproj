@@ -186,6 +186,7 @@
     <ClCompile Include="DNPacketLayer.cpp" />
     <ClCompile Include="DNServerDgramSocket.cpp" />
     <ClCompile Include="DNServiceRunner.cpp" />
+    <ClCompile Include="DNUserLayer.cpp" />
     <ClCompile Include="DSocketSystem.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
