@@ -23,7 +23,7 @@ void DNCmdEcho::Send(const DSocketAddrIn &Addr)
 
 void DNCmdEcho::Recv(DNTransData* Data)
 {
-	DNCmdEchoReply *Cmd = dynamic_cast<DNCmdEchoReply*>(this->Service->Processor->GetCmd(DNCmdType::ReplyEcho));
+	DNCmdEchoReply *Cmd = this->Service->Processor->ParseCmd<DNCmdEchoReply>(DNCmdType::ReplyEcho);
 	Cmd->Send(Data->Addr);
 }
 

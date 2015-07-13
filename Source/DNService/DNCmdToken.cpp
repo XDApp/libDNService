@@ -25,7 +25,7 @@ void DNCmdToken::Send(const DSocketAddrIn &Addr)
 
 void DNCmdToken::Recv(DNTransData* Data)
 {
-	DNCmdTokenReply *Cmd = dynamic_cast<DNCmdTokenReply*>(this->Service->Processor->GetCmd(DNCmdType::ReplyToken));
+	DNCmdTokenReply *Cmd = this->Service->Processor->ParseCmd<DNCmdTokenReply>(DNCmdType::ReplyToken);
 	Cmd->Send(Data->Addr);
 }
 

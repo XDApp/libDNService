@@ -1,9 +1,7 @@
 ﻿#include "stdafx.h"
-#include "DAppConfigManager.h"
+#include "DAConfigManager.h"
 
 DReference *GlobalDF;
-
-extern EVP_PKEY *___Data_TMP_Key;
 
 class DApp
 {
@@ -18,23 +16,24 @@ public:
 		DCryptRSA::Initialize();
 
 		GlobalDF = Engine->DF;
-		this->Manager = new DNServiceRunner();
 		this->Engine->BeforeInitialize->AddHandler(new DEventHandler([this](DObject* Sender)
 		{
-			DAppConfigManager *ConfigManager = new DAppConfigManager();
-
+			DAConfigManager *Config = new DAConfigManager();
+			Sender->DF->ConfigManager = Config;
 			Sender->DF->DebugManager = new DDebugManager();
-			Sender->DF->ConfigManager = ConfigManager;
+
+			this->Manager = new DNServiceRunner(Config);
 
 			DRSAKey *Key = new DRSAKey(2048);
-			___Data_TMP_Key = ConfigManager->RSAKey = DCryptRSA::ToEVP(Key->GetKey());
-
+			Config->LocalKey = DCryptRSA::ToEVP(Key->GetKey());
 		}));
 		this->Engine->AfterDispose->AddHandler(new DEventHandler([this](DObject* Sender)
 		{
+			DAConfigManager *Config = Sender->DF->ConfigManager->GetConfig<DAConfigManager>();
+
+			DDel(Config->LocalKey);
 			DDel(Sender->DF->DebugManager);
 			DDel(Sender->DF->ConfigManager);
-			DDel(___Data_TMP_Key);
 		}));
 	};
 
@@ -74,7 +73,7 @@ public:
 		
 		while (true)
 		{
-			TokenCmd->Send(DSocketAddrIn("192.168.0.105", 6000));
+			TokenCmd->Send(DSocketAddrIn("192.168.0.105", 8000));
 			Sleep(1000);
 		}
 		Manager->StopServ();

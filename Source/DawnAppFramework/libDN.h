@@ -11,3 +11,4 @@
 #include <DNService/DNCmdProcessor.h>
 #include <DNService/DNCmdEcho.h>
 #include <DNService/DNServiceRunner.h>
+#include <DNService/DNConfigManager.h>

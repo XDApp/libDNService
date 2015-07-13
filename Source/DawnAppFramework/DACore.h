@@ -12,4 +12,5 @@
 #include <DACore/DUtil.h>
 #include <DACore/DException.h>
 #include <DACore/DIOException.h>
-
+#include <DACore/DConfigManager.h>
+#include <DACore/DCoreConfigManager.h>

@@ -18,8 +18,10 @@ public:
 private:
 	DSocketAddrIn ListenAddr;
 	std::thread *ListenThread;
+
+	DNConfigManager *config;
 public:
-	DNServiceRunner();
+	DNServiceRunner(DNConfigManager *Config);
 	~DNServiceRunner();
 
 	void RunServ();

@@ -155,16 +155,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DAConfigManager.h" />
     <ClInclude Include="DACore.h" />
     <ClInclude Include="DACrypt.h" />
     <ClInclude Include="DANetwork.h" />
-    <ClInclude Include="DAppConfigManager.h" />
     <ClInclude Include="libDN.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DAppConfigManager.cpp" />
+    <ClCompile Include="DAConfigManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

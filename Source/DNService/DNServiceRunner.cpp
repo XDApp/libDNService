@@ -13,8 +13,10 @@
 
 #include "DNServiceRunner.h"
 #include "DNServerDgramSocket.h"
+#include "DNConfigManager.h"
 
-DNServiceRunner::DNServiceRunner()
+DNServiceRunner::DNServiceRunner(DNConfigManager *Config)
+	: config(Config)
 {
 }
 
@@ -48,6 +50,8 @@ void DNServiceRunner::RunServ()
 	this->Service->CMDLayer = cmdLayer;
 	this->Service->UserLayer = userLayer;
 
+	this->Service->Config = this->config;
+
 	this->Service->Processor = new DNCmdProcessor();
 	this->RegisterCommands();
 
@@ -77,7 +81,7 @@ void DNServiceRunner::StopServ()
 void DNServiceRunner::RunSocket()
 {
 	this->Service->ListenSocket = new DNServerDgramSocket();
-	this->ListenAddr = DSocketAddrIn(6000);
+	this->ListenAddr = DSocketAddrIn(8000);
 	this->Service->ListenSocket->Bind(this->ListenAddr);
 	GlobalDF->DebugManager->Log(this, L"Socket Initialized");
 	this->Receiving = true;
@@ -90,12 +94,12 @@ void DNServiceRunner::RunSocket()
 
 		while (this->Receiving)
 		{
-			len = this->Service->ListenSocket->Recv((char*)&Packet, sizeof(Packet), AddrIn);
+			len = this->Service->ListenSocket->Recv(reinterpret_cast<char*>(&Packet), sizeof(Packet), AddrIn);
 			if (len > 0)
 			{
 				DNTransData *TransData = new DNTransData;
-				TransData->Addr = AddrIn;
-				TransData->Packet = Packet;
+				TransData->Addr = std::move(AddrIn);
+				TransData->Packet = std::move(Packet);
 				this->Service->NetworkLayer->Receive(TransData);
 			}
 			if (len <= 0)
