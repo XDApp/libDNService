@@ -25,13 +25,15 @@ public:
 			this->Manager = new DNServiceRunner(Config);
 
 			DRSAKey *Key = new DRSAKey(2048);
-			Config->LocalKey = DCryptRSA::ToEVP(Key->GetKey());
+			Config->LocalPriKey = DCryptRSA::ToEVP(Key->GetPriKey());
+			Config->LocalPubKey = DCryptRSA::ToEVP(Key->GetPubKey());
 		}));
 		this->Engine->AfterDispose->AddHandler(new DEventHandler([this](DObject* Sender)
 		{
 			DAConfigManager *Config = Sender->DF->ConfigManager->GetConfig<DAConfigManager>();
 
-			DDel(Config->LocalKey);
+			DDel(Config->LocalPubKey);
+			DDel(Config->LocalPriKey);
 			DDel(Sender->DF->DebugManager);
 			DDel(Sender->DF->ConfigManager);
 		}));
@@ -74,7 +76,7 @@ public:
 		while (true)
 		{
 			TokenCmd->Send(DSocketAddrIn("192.168.0.105", 8000));
-			Sleep(1000);
+			Sleep(1);
 		}
 		Manager->StopServ();
 

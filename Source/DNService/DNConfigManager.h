@@ -11,6 +11,7 @@ protected:
 	virtual void Load() override;
 	virtual void Save() override;
 public:
-	EVP_PKEY* LocalKey;
+	EVP_PKEY* LocalPubKey;
+	EVP_PKEY* LocalPriKey;
 };
 

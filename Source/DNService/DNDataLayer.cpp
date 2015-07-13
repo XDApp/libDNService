@@ -17,7 +17,7 @@ void DNDataLayer::Receive(DNTransData *Data)
 {
 	if (Data->EncryptType == DNEncryptType::RSA)
 	{
-		this->__RSADecryptData(Data, this->Service->Config->LocalKey);
+		this->__RSADecryptData(Data, this->Service->Config->LocalPriKey);
 	}
 	this->Service->CMDLayer->Receive(Data);
 }
@@ -28,7 +28,7 @@ void DNDataLayer::Send(DNTransData *Data)
 {
 	if (Data->EncryptType == DNEncryptType::RSA)
 	{
-		this->__RSAEncryptData(Data, this->Service->Config->LocalKey);
+		this->__RSAEncryptData(Data, this->Service->Config->LocalPubKey);
 	}
 	this->Service->PacketLayer->Send(Data);
 }
