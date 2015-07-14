@@ -16,7 +16,6 @@ public:
 	bool Receiving;
 	bool ThreadDisposed;
 private:
-	DSocketAddrIn ListenAddr;
 	std::thread *ListenThread;
 
 	DNConfigManager *config;

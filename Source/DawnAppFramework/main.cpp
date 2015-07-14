@@ -27,6 +27,8 @@ public:
 			DRSAKey *Key = new DRSAKey(2048);
 			Config->LocalPriKey = DCryptRSA::ToEVP(Key->GetPriKey());
 			Config->LocalPubKey = DCryptRSA::ToEVP(Key->GetPubKey());
+			Config->ServiceAddr = DSocketAddrIn(8000);
+			Config->Key_Bits = 2048;
 		}));
 		this->Engine->AfterDispose->AddHandler(new DEventHandler([this](DObject* Sender)
 		{
@@ -67,16 +69,17 @@ public:
 
 		RTokenCmd->WhenRecv->AddHandler(new DEventHandler([](DObject *Sender){
 			auto Data = dynamic_cast<DNTransData*>(Sender);
-			char tmp[30];
+			char tmp[1500];
 			strncpy_s(tmp, Data->Data, Data->Size);
 			if (Data) GlobalDF->DebugManager->Log(nullptr, (L"Token Recved: " + DUtil::ANSIToUnicode(tmp)).c_str());
 		}));
-
+		
+		TokenCmd->Send(DSocketAddrIn("192.168.0.105", 8000));
 		
 		while (true)
 		{
-			TokenCmd->Send(DSocketAddrIn("192.168.0.105", 8000));
-			Sleep(1);
+			
+			Sleep(500);
 		}
 		Manager->StopServ();
 
@@ -84,48 +87,6 @@ public:
 		this->Engine->Render();
 	}
 };
-
-int test_Crypt(void)
-{
-	char* buff = "I'm SkyZH!";
-	unsigned char* __Ori = (unsigned char*)malloc(sizeof(char) * 500);
-	unsigned char* __Dest = (unsigned char*)malloc(sizeof(char) * 500);
-
-	memcpy(__Ori, buff, strlen(buff) + 1);
-
-	size_t __DestSize = 200;
-	size_t __OriSize = 200;
-	DCryptRSA::Initialize();
-
-	DRSAKey *Key = new DRSAKey(2048);
-	EVP_PKEY *PubKey = DCryptRSA::ToEVP(Key->GetKey());
-	EVP_PKEY *PriKey = DCryptRSA::ToEVP(Key->GetKey());
-
-	DCryptRSA::EVP_Encrypt(PubKey, __Dest, __DestSize, __Ori, __OriSize);
-	printf("Ciphertext is:\n");
-	BIO_dump_fp(stdout, (const char *)__Dest, __DestSize);
-
-	OPENSSL_free(__Ori);
-	DCryptRSA::EVP_Decrypt(PriKey, __Ori, __OriSize, __Dest, __DestSize);
-	BIO_dump_fp(stdout, (const char *)__Ori, __OriSize);
-	std::cout << __Ori << std::endl;
-	OPENSSL_free(__Dest);
-
-	DCryptRSA::EVP_Encrypt(PubKey, __Dest, __DestSize, __Ori, __OriSize);
-	printf("Ciphertext is:\n");
-	BIO_dump_fp(stdout, (const char *)__Dest, __DestSize);
-
-
-	OPENSSL_free(__Ori);
-
-	DCryptRSA::EVP_Decrypt(PriKey, __Ori, __OriSize, __Dest, __DestSize);
-	BIO_dump_fp(stdout, (const char *)__Ori, __OriSize);
-	std::cout << __Ori << std::endl;
-	OPENSSL_free(__Dest);
-
-	DCryptRSA::Dispose();
-	return 0;
-}
 
 int _tmain(int argc, _TCHAR* argv[])
 {

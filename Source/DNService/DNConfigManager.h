@@ -13,5 +13,9 @@ protected:
 public:
 	EVP_PKEY* LocalPubKey;
 	EVP_PKEY* LocalPriKey;
+
+	DSocketAddrIn ServiceAddr;
+
+	int Key_Bits;
 };
 

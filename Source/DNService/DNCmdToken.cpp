@@ -41,11 +41,12 @@ DNCmdTokenReply::~DNCmdTokenReply()
 	DDel(WhenRecv);
 }
 
-const int TokenSize = 20;
+const int TokenSize = 1068;
 
 void DNCmdTokenReply::Send(const DSocketAddrIn &Addr)
 {
 	DNTransData *Data = this->CreatePacket();
+
 	Data->EncryptType = DNEncryptType::RSA;
 	Data->Addr = Addr;
 	Data->Cmd = (DNCommand)DNCmdType::ReplyToken;
@@ -55,12 +56,10 @@ void DNCmdTokenReply::Send(const DSocketAddrIn &Addr)
 		int _char = rand() % 36;
 		char &_Target = Data->Data[i];
 		if (_char < 10)_Target = static_cast<char>(_char + '0');
-		if (_char >= 10)_Target = static_cast<char>(_char + 'a' - 10);
+		else if (_char >= 10)_Target = static_cast<char>(_char + 'a' - 10);
 	}
 	Data->Size = TokenSize;
 
-	char tmp[30];
-	strncpy_s(tmp, Data->Data, Data->Size);
 	this->Service->UserLayer->Send(Data);
 }
 

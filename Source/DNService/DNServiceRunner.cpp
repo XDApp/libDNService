@@ -81,8 +81,7 @@ void DNServiceRunner::StopServ()
 void DNServiceRunner::RunSocket()
 {
 	this->Service->ListenSocket = new DNServerDgramSocket();
-	this->ListenAddr = DSocketAddrIn(8000);
-	this->Service->ListenSocket->Bind(this->ListenAddr);
+	this->Service->ListenSocket->Bind(this->Service->Config->ServiceAddr);
 	GlobalDF->DebugManager->Log(this, L"Socket Initialized");
 	this->Receiving = true;
 	auto RecvFunc = [this]()
