@@ -66,6 +66,7 @@ public:
 
 		DNCmdTokenReply* RTokenCmd = this->Manager->Service->Processor->ParseCmd<DNCmdTokenReply>(DNCmdType::ReplyToken);
 		DNCmdToken* TokenCmd = this->Manager->Service->Processor->ParseCmd<DNCmdToken>(DNCmdType::Token);
+		DNCmdConnect* ConnectCmd = this->Manager->Service->Processor->ParseCmd<DNCmdConnect>(DNCmdType::Connect);
 
 		RTokenCmd->WhenRecv->AddHandler(new DEventHandler([](DObject *Sender){
 			auto Data = dynamic_cast<DNTransData*>(Sender);
@@ -74,11 +75,11 @@ public:
 			if (Data) GlobalDF->DebugManager->Log(nullptr, (L"Token Recved: " + DUtil::ANSIToUnicode(tmp)).c_str());
 		}));
 		
-		TokenCmd->Send(DSocketAddrIn("192.168.0.105", 8000));
 		
+		//ConnectCmd->Send(DSocketAddrIn("192.168.0.105", 8000));
 		while (true)
 		{
-			
+			TokenCmd->Send(DSocketAddrIn("192.168.0.105", 8000));
 			Sleep(500);
 		}
 		Manager->StopServ();

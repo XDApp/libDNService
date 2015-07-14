@@ -2,6 +2,7 @@
 #include "DNCmd.h"
 
 class DNServiceManager;
+class DEventManager;
 
 class DNCmdConnect :
 	public DNCmd
@@ -10,8 +11,8 @@ class DNCmdConnect :
 public:
 	DNCmdConnect(DNServiceManager* service);
 	~DNCmdConnect();
-	virtual void Send(const DSocketAddrIn &Addr) = 0;
-	virtual void Recv(DNTransData* Data) = 0;
+	virtual void Send(const DSocketAddrIn &Addr) override;
+	virtual void Recv(DNTransData* Data) override;
 };
 
 class DNCmdConnectReply :
@@ -21,6 +22,8 @@ class DNCmdConnectReply :
 public:
 	DNCmdConnectReply(DNServiceManager* service);
 	~DNCmdConnectReply();
-	virtual void Send(const DSocketAddrIn &Addr) = 0;
-	virtual void Recv(DNTransData* Data) = 0;
+	virtual void Send(const DSocketAddrIn &Addr) override;
+	virtual void Recv(DNTransData* Data) override;
+
+	DEventManager *WhenRecv;
 };

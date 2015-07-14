@@ -13,6 +13,7 @@ protected:
 public:
 	EVP_PKEY* LocalPubKey;
 	EVP_PKEY* LocalPriKey;
+	RSA* LocalPubRSAKey;
 
 	DSocketAddrIn ServiceAddr;
 

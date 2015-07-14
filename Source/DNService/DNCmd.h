@@ -11,7 +11,9 @@ enum class DNCmdType : DNCommand
 	Echo = 0,
 	ReplyEcho,
 	Token,
-	ReplyToken
+	ReplyToken,
+	Connect,
+	ReplyConnect
 };
 
 class DNCmd

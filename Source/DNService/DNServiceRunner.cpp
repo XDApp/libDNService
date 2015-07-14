@@ -10,6 +10,7 @@
 #include "DNCmdProcessor.h"
 #include "DNCmdEcho.h"
 #include "DNCmdToken.h"
+#include "DNCmdConnect.h"
 
 #include "DNServiceRunner.h"
 #include "DNServerDgramSocket.h"
@@ -31,6 +32,8 @@ void DNServiceRunner::RegisterCommands()
 	this->Service->Processor->Register(DNCmdType::ReplyEcho, new DNCmdEchoReply(this->Service));
 	this->Service->Processor->Register(DNCmdType::Token, new DNCmdToken(this->Service));
 	this->Service->Processor->Register(DNCmdType::ReplyToken, new DNCmdTokenReply(this->Service));
+	this->Service->Processor->Register(DNCmdType::Connect, new DNCmdConnect(this->Service));
+	this->Service->Processor->Register(DNCmdType::ReplyConnect, new DNCmdConnectReply(this->Service));
 }
 
 void DNServiceRunner::RunServ()

@@ -10,5 +10,6 @@
 #include <DNService/DNCmdToken.h>
 #include <DNService/DNCmdProcessor.h>
 #include <DNService/DNCmdEcho.h>
+#include <DNService/DNCmdConnect.h>
 #include <DNService/DNServiceRunner.h>
 #include <DNService/DNConfigManager.h>
