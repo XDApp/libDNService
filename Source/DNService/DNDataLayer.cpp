@@ -53,7 +53,7 @@ void DNDataLayer::__RSAEncryptData(DNTransData *Data, EVP_PKEY* RSAKey)
 		Data->Size += ___DestSize;
 	}
 	memcpy(reinterpret_cast<char*>(&Data->Packet.Request), __Dest, Data->Size);
-	delete[]__Dest;
+	DArrDel(__Dest);
 }
 
 void DNDataLayer::__RSADecryptData(DNTransData *Data, EVP_PKEY* RSAKey)
@@ -72,8 +72,7 @@ void DNDataLayer::__RSADecryptData(DNTransData *Data, EVP_PKEY* RSAKey)
 		Data->Size += ___DestSize;
 	}
 	memcpy(reinterpret_cast<char*>(&Data->Packet.Request), __Dest, Data->Size);
-
-	delete[]__Dest;
+	DArrDel(__Dest);
 }
 
 
