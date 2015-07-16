@@ -89,13 +89,35 @@ public:
 	}
 };
 
+void test_Crypt()
+{
+	char* buf = "Hi, SkyZH.";
+
+	unsigned char* _ori = new unsigned char[1000];
+	unsigned char vi[256];
+	unsigned char* _crypt = new unsigned char[1000];
+	memset(vi, 0, sizeof(vi));
+
+	size_t _crypt_size = 0, _ori_size = 0;
+	DAESKey *AESKey = new DAESKey();
+
+	memcpy(_ori, buf, sizeof(buf));
+	DCryptAES::AES_Encrypt(AESKey, _crypt, _crypt_size, _ori, sizeof(_ori), vi);
+	BIO_dump_fp(stdout, reinterpret_cast<const char*>(_crypt), _crypt_size);
+	DCryptAES::AES_Decrypt(AESKey, _ori, _ori_size, _crypt, _crypt_size, vi);
+	BIO_dump_fp(stdout, reinterpret_cast<const char*>(_ori), _ori_size);
+	DDel(AESKey);
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-	DApp *App = new DApp();
-	App->Initialize();
-	App->Loop();
-	App->Dispose();
+	//DApp *App = new DApp();
+	//App->Initialize();
+	//App->Loop();
+	//App->Dispose();
 	//test_Crypt();
+	//DDel(App);
+	test_Crypt();
 	system("pause");
 	return 0;
 }
