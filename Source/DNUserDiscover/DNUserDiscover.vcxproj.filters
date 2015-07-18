@@ -15,28 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DNKBucketNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="DACore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DANetwork.h">
+    <ClInclude Include="DNKBucketData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="libDN.h">
+    <ClInclude Include="DNKBucket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DACrypt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DAConfigManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DNUserDiscover.h">
+    <ClInclude Include="DNKHash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,10 +44,16 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="DNKBucketNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DAConfigManager.cpp">
+    <ClCompile Include="DNKBucketData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DNKBucket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DNKHash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
