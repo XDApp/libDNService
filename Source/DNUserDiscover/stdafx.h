@@ -19,6 +19,7 @@
 #include <locale>
 #include <codecvt>
 #include <memory>
+#include <bitset>
 
 #include <openssl/rsa.h>
 #include <openssl/conf.h>

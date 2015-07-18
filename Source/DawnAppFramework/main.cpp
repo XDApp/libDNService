@@ -89,15 +89,21 @@ public:
 	}
 };
 
+#include <bitset>
+
 void test_Hash()
 {
-	DNKHash _hash("aaaaaaaaaaaaaaaaaaaa");
-	DNKHash hash(std::move(_hash));
-	for (int i = 0; i < DNKHash_Size; i++)
-	{
-		std::cout << hash[i];
-	}
-	std::cout << std::endl;
+	DNKHash _hash1(reinterpret_cast<const unsigned char*>((std::string(20, '\x00').c_str())));
+	DNKHash _hash2(reinterpret_cast<const unsigned char*>(((std::string(19, '\x00') + '\x01').c_str())));
+	std::cout << DNKHash::KPos(_hash1, _hash2) << std::endl;
+
+	DNKBucket* bucket = new DNKBucket(_hash1);
+
+	bucket->Initialize();
+	bucket->AddNode(_hash2);
+	bucket->__Debug_Print();
+
+	DDel(bucket);
 	return;
 }
 

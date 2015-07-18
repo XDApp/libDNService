@@ -161,7 +161,6 @@
     <ClInclude Include="DACore.h" />
     <ClInclude Include="DNKBucket.h" />
     <ClInclude Include="DNKBucketData.h" />
-    <ClInclude Include="DNKBucketNode.h" />
     <ClInclude Include="DNKHash.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -169,7 +168,6 @@
   <ItemGroup>
     <ClCompile Include="DNKBucket.cpp" />
     <ClCompile Include="DNKBucketData.cpp" />
-    <ClCompile Include="DNKBucketNode.cpp" />
     <ClCompile Include="DNKHash.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
