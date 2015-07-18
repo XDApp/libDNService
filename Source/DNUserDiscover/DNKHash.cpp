@@ -84,8 +84,10 @@ std::string DNKHash::GetString()
 	std::bitset<8>bits;
 	for (int i = 0; i < DNKHash_Size; i++)
 	{
+		if (i != 0 && i % 10 == 0) Hash += "\n";
 		bits = this->_hash[i];
 		Hash += bits.to_string();
+		
 	}
 	return std::move(Hash);
 }
